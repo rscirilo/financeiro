@@ -1,0 +1,21 @@
+PASSOS
+
+1 - EDITAR O ARQUIVO INDEX.PHP
+	define('BASE_URL', 'http://financeiro.test'); PARA SUA URL
+		EX. 'http://localhost/meuprojeto'
+
+2 - EDITAR O ARQUIVO CONFIG.PHP DE ACORDO COM SEU BANCO DE DADOS
+
+3 - EDITAR O ARQUIVO .htacess CASO ESTEJA EM LOCAL HOST
+
+	 MUDAR 
+	 	RewriteRule ^(.*)$ /index.php/$1 [L]
+	PARA
+		RewriteRule ^(.*)$ /meuprojeto/index.php/$1 [L]
+
+
+4 - LOGINS E SENHAS
+	Master - master@admin.com - master
+
+	Usuario - admin@admin.com - admin
+
