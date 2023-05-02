@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 28-Abr-2023 às 02:09
+-- Tempo de geração: 02-Maio-2023 às 05:53
 -- Versão do servidor: 5.7.33
 -- versão do PHP: 7.4.19
 
@@ -28,20 +28,29 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `id_company` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `phone` varchar(100) DEFAULT NULL,
-  `eddress` varchar(255) DEFAULT NULL,
-  `address_neighb` varchar(255) DEFAULT NULL,
-  `address_city` varchar(255) DEFAULT NULL,
-  `address_state` varchar(255) DEFAULT NULL,
-  `address_country` varchar(100) DEFAULT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `address2` varchar(100) DEFAULT NULL,
+  `address_number` varchar(50) DEFAULT NULL,
+  `address_neighb` varchar(100) DEFAULT NULL,
+  `address_city` varchar(50) DEFAULT NULL,
+  `address_state` varchar(50) DEFAULT NULL,
+  `address_country` varchar(50) DEFAULT NULL,
   `address_zipcode` varchar(50) DEFAULT NULL,
   `stars` int(11) NOT NULL DEFAULT '3',
   `internal_obs` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `clients`
+--
+
+INSERT INTO `clients` (`id`, `id_company`, `name`, `email`, `phone`, `address`, `address2`, `address_number`, `address_neighb`, `address_city`, `address_state`, `address_country`, `address_zipcode`, `stars`, `internal_obs`) VALUES
+(1, 1, 'Rodrigo dos Santos Cirilo2', 'rscirilo@gmail.com', '84991369084', 'Rua Eduardo Medeiros', 'teste 112', '25', 'Nova Betânia', 'Mossoró', 'RN', 'Brasil', '59612122', 3, 'Cliente informação 2');
 
 -- --------------------------------------------------------
 
@@ -110,8 +119,8 @@ CREATE TABLE `permission_groups` (
 --
 
 INSERT INTO `permission_groups` (`id`, `id_company`, `name`, `params`) VALUES
-(1, 1, 'MASTER', '1,2,5,6,7,8,9,10'),
-(2, 1, 'ADMIN', '1,6,7,8,9,10');
+(1, 1, 'MASTER', '1,2,5,6,7,11'),
+(2, 1, 'ADMIN', '1,7,8,9,10,11');
 
 -- --------------------------------------------------------
 
@@ -135,9 +144,7 @@ INSERT INTO `permission_params` (`id`, `id_company`, `name`) VALUES
 (5, 1, 'nome da permissãp'),
 (6, 1, 'users_view'),
 (7, 1, 'clients_view'),
-(8, 1, 'emprestimo_view'),
-(9, 1, 'estatistica_view'),
-(10, 1, 'exemplo_view');
+(11, 1, 'clients_edit');
 
 -- --------------------------------------------------------
 
@@ -169,12 +176,18 @@ INSERT INTO `users` (`id`, `id_company`, `email`, `password`, `id_group`) VALUES
 -- Índices para tabela `clients`
 --
 ALTER TABLE `clients`
-  ADD KEY `id_empresas` (`id_company`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `companies`
 --
 ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `emprestimo`
+--
+ALTER TABLE `emprestimo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -206,10 +219,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de tabela `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `companies`
 --
 ALTER TABLE `companies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `emprestimo`
+--
+ALTER TABLE `emprestimo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `estatistica`
@@ -227,7 +252,7 @@ ALTER TABLE `permission_groups`
 -- AUTO_INCREMENT de tabela `permission_params`
 --
 ALTER TABLE `permission_params`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `users`
