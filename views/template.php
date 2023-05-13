@@ -15,12 +15,12 @@
             <div class="menuarea">
                 <ul>
                     <li><a href="<?php echo BASE_URL; ?>">Home</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/clients">Clientes</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/emprestimo">Empréstimos</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/estatistica">Estatísticas</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/permissions">Permissões</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/users">Usuários</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/exemplo">Exemplo</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>clients">Clientes</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>emprestimo">Empréstimos</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>estatistica">Estatísticas</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>permissions">Permissões</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>users">Usuários</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>exemplo">Exemplo</a></li>
 
                 </ul>
             </div><!--menuarea-->

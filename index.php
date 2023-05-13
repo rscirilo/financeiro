@@ -2,7 +2,7 @@
 session_start();
 require 'config.php';
 
-define('BASE_URL', 'http://financeiro.test');
+define('BASE_URL', 'http://localhost/financeiro/');
 
 spl_autoload_register(function ($class){
     if(strpos($class, 'Controller') > -1) {

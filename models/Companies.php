@@ -22,5 +22,12 @@ class Companies extends model{
 			return '';
 		}
 	}
+	public function getId() {
+		if(isset($this->companyInfo['id'])) {
+			return $this->companyInfo['id'];
+		} else {
+			return '';
+		}
+	}
 	
 }

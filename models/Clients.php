@@ -15,6 +15,18 @@ class Clients extends model{
 		return $array;
 	}
 
+	public function getCount($id_company){
+		$r = 0;
+
+		$sql = $this->db->prepare("SELECT COUNT(*) as c FROM clients WHERE id_company = :id_company");
+		$sql->bindValue('id_company', $id_company);
+		$sql->execute();
+		$row = $sql->fetch();
+
+		$r= $row['c']; 
+		return $r;
+	}
+
 	public function getInfo($id, $id_company) {
 		$array = array();
 
@@ -27,6 +39,18 @@ class Clients extends model{
 			$array = $sql->fetch();
 		}
 
+		return $array;
+	}
+
+	public function searchClientByName($name, $id_company) {
+		$array = array();
+		$sql = $this->db->prepare("SELECT name,id FROM clients WHERE name LIKE :name LIMIT 10");
+		$sql->bindValue(':name', '%'.$name.'%');
+		$sql->execute();
+		
+		if ($sql->rowCount() > 0) {
+			$array = $sql->fetchAll();
+		}
 		return $array;
 	}
 
@@ -72,6 +96,14 @@ class Clients extends model{
 		$sql->bindValue(":id_company2", $id_company);
 		$sql->execute();
 
+	}
+	public function delete($id){
+		if ($this->existeUsuario($id) == false) {
+			# code...
+			$sql = $this->db->prepare("DELETE FROM clients WHERE id = :id");
+			$sql->bindValue(':id', $id);
+			$sql->execute();
+		}
 	}
 	
 }

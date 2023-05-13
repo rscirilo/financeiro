@@ -17,6 +17,7 @@ class ajaxController extends controller {
     	$data = array();
     	$u = new Users();
         $u->setLoggedUser();
+        $company = neW Companies($u->getCompany());
     	$c = new Clients();
 
     	if(isset($_GET['q']) && !empty($_GET['q'])) {
