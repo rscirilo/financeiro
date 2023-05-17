@@ -14,9 +14,7 @@
         <tr>
             <td><?php echo number_format($emprestimo_unico['valor_emprestimo'], 2,',','.') ?></td>
             <td><?php echo $emprestimo_unico['juros_mes']?></td>
-            <td>
-                
-            </td>
+            <td><?php echo $emprestimo_unico['valor_emprestimo'] - $emprestimo_unico['recebido']?></td>
             <td>
                 <div class="button button_small">
                     <a href="<?php echo BASE_URL; ?>emprestimo/editar/<?php echo $emprestimo_unico['id'];

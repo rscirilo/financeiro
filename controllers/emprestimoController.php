@@ -60,28 +60,43 @@ class emprestimoController extends controller {
                 $dataemprestimo = date('Y-m-d');
                 $emp->add($u->getCompany(), $id, $valor, $juros, $dataemprestimo, $divida);
                 echo $id;
+                header("Location: ".BASE_URL."/emprestimo");  
             }
             
         } 
     }
-    public function quitar(){
+    public function quitar($id){
         $data = array();
         $u = new Users();
         $u->setLoggedUser();
         $company = new Companies($u->getCompany());
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
-        $data['id_company'] = $company->getId();
 
-        if($u->hasPermission('emprestimo_edit')){
+        if($u->hasPermission('emprestimo_quitar')){
             $emp = new Emprestimo();
-            $data['clients_list'] = $emp->getListNome($u->getCompany());
-            if($data['clients_list'] < 1){
-                echo "vazio";}
-                $this->loadTemplate('quitar', $data);
         }
+        $data['clients_list'] = $emp->getInfo($id, $u->getCompany());
+
+        
+        if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
+            $valor_emprestimo = addslashes($_POST['valor_emprestimo']);
+            $juros_mes = addslashes($_POST['juros_mes']);
+            $id_client = addslashes($_POST['id_client']);
+            $data_emprestimo = addslashes($_POST['data_emprestimo']);
+            $id_company = addslashes($_POST['id_company']);
+            $total_pago = addslashes($_POST['recebido']) + addslashes($_POST['valor']);
+            if($_POST['select'] == "nao"){
+                $emp->quitar($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago);
+                header("Location: ".BASE_URL."/clients");  
+            }
+            
+             
+        }
+        $data['client_info'] = $emp->getInfo($id, $u->getCompany());
+        $this->loadTemplate('quitar', $data);
     }
-    public function editar(){
+    public function editar($id){
         $data = array();
         $u = new Users();
         $u->setLoggedUser();
@@ -90,12 +105,25 @@ class emprestimoController extends controller {
         $data['user_email'] = $u->getEmail();
         $data['id_company'] = $company->getId();
 
+
         if($u->hasPermission('emprestimo_edit')){
             $emp = new Emprestimo();
-            $data['clients_list'] = $emp->getListNome($u->getCompany());
-            if($data['clients_list'] < 1){
-                echo "vazio";}
-                $this->loadTemplate('emprestimo_edit', $data);
+            $data['emp_info'] = $emp->getInfo($id, $u->getCompany());
+
+            
+            $this->loadTemplate('emprestimo_edit', $data);
+            if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
+                $valor_emprestimo = addslashes($_POST['valor_emprestimo']);
+                $juros_mes = addslashes($_POST['juros_mes']);
+                $id_client = addslashes($_POST['id_client']);
+                $data_emprestimo = addslashes($_POST['data_emprestimo']);
+                $id_company = addslashes($_POST['id_company']);
+                $recebido = addslashes($_POST['recebido']);
+
+                $emp->edit($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $recebido);
+                header("Location: ".BASE_URL."/emprestimo");  
+                 
+            }
         }
     }
 }
