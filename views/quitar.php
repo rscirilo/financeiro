@@ -14,10 +14,12 @@
 <input type="hidden" name="id" id="id" value="<?php echo $client_info['id'];?>" />	
 	<input type="hidden" name="juros_mes" value="<?php echo $client_info['juros_mes'];?>">
 	<input type="hidden" name="recebido" value="<?php echo $client_info['recebido'];?>">
+
 	<input type="hidden" name="valor_emprestimo" value="<?php echo $client_info['valor_emprestimo']?>"/><br/><br/>
 	<input type="hidden" name="data_emprestimo" value="<?php echo $client_info['data_emprestimo']; ?>">
 	<input type="hidden" name="id_client" value="<?php echo $client_info['id_client']; ?>" />
 	<input type="hidden" name="id_company" value="<?php echo $client_info['id_company']; ?>" />
+	<input type="hidden" name="mensalidade" value="<?php echo $client_info['mensalidade'] ?>">
 
 	<label>Esse é um pagamento ou mensalidade?</label>
 <br/>

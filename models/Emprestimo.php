@@ -100,6 +100,19 @@ class Emprestimo extends model{
         $sql->bindValue(':juros_mes', $juros_mes);
         $sql->bindValue(':data_emprestimo', $data_emprestimo);
         $sql->bindValue(':recebido', $recebido);
+        // $sql->bindValue(':mensalidade', $mensalidade);
         $sql->execute();
-    }     
+    }
+    public function mensalidade($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $mensalidade){
+        $sql = $this->db->prepare("UPDATE emprestimo SET id_client = :id_client, valor_emprestimo = :valor_emprestimo, juros_mes = :juros_mes, data_emprestimo = :data_emprestimo, recebido = :recebido, mensalidade = :mensalidade  WHERE id = :id AND id_company = :id_company");
+        $sql->bindValue(':id', $id);
+        $sql->bindValue(':id_company', $id_company);
+        $sql->bindValue(':id_client', $id_client);
+        $sql->bindValue(':valor_emprestimo', $valor_emprestimo);
+        $sql->bindValue(':juros_mes', $juros_mes);
+        $sql->bindValue(':data_emprestimo', $data_emprestimo);
+        $sql->bindValue(':recebido', $total_pago);
+        $sql->bindValue(':mensalidade', $mensalidade);
+        $sql->execute();
+    }
 }

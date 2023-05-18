@@ -80,19 +80,35 @@ class emprestimoController extends controller {
 
         
         if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
-            $valor_emprestimo = addslashes($_POST['valor_emprestimo']);
-            $juros_mes = addslashes($_POST['juros_mes']);
+            $valor_emprestimo = (int) addslashes($_POST['valor_emprestimo']);
+            $juros_mes = (int) addslashes($_POST['juros_mes']);
             $id_client = addslashes($_POST['id_client']);
             $data_emprestimo = addslashes($_POST['data_emprestimo']);
             $id_company = addslashes($_POST['id_company']);
-            $total_pago = addslashes($_POST['recebido']) + addslashes($_POST['valor']);
+            $total_pago = (int) addslashes($_POST['recebido']) + (int) addslashes($_POST['valor']);
+
+
+            $mensalidade = (int) addslashes($_POST['mensalidade']);
+            $total_mensalidade = 0;
+            $meses_pagos =(int) addslashes($_POST['meses_pagos']);
+
+            $total_mensalidade = $meses_pagos * ($valor_emprestimo * ($juros_mes/100));
+                if($mensalidade > 0){
+                    $total_mensalidade = $total_mensalidade + $mensalidade;}
+
             if($_POST['select'] == "nao"){
-                $emp->quitar($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago);
-                header("Location: ".BASE_URL."/clients");  
+                
+                $emp->quitar($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $emprestimo);
+                header("Location: ".BASE_URL."/emprestimo");  
             }
-            
-             
+            else if($_POST['select'] == "sim"){
+                
+                
+                $emp->mensalidade($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $total_mensalidade);
+                header("Location: ".BASE_URL."/emprestimo");
+            }
         }
+        
         $data['client_info'] = $emp->getInfo($id, $u->getCompany());
         $this->loadTemplate('quitar', $data);
     }

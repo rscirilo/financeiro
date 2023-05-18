@@ -6,15 +6,15 @@
 <table border="0" width="100%">
     <tr>
         <th>Valor</th>
-        <th>Juros</th>
-        <th>Devendo</th>
+        <th>Devendo/pago</th>
+        <th>Pago em Mensalidades</th>
         <th>Ações</th>
     </tr>
     <?php foreach($emprestimo_list as $emprestimo_unico):?>
         <tr>
             <td><?php echo number_format($emprestimo_unico['valor_emprestimo'], 2,',','.') ?></td>
-            <td><?php echo $emprestimo_unico['juros_mes']?></td>
-            <td><?php echo $emprestimo_unico['valor_emprestimo'] - $emprestimo_unico['recebido']?></td>
+            <td><?php echo $emprestimo_unico['valor_emprestimo'] - $emprestimo_unico['recebido']?> / <?php echo $emprestimo_unico['recebido'] ?></td>
+            <td><?php echo $emprestimo_unico['mensalidade']?></td>
             <td>
                 <div class="button button_small">
                     <a href="<?php echo BASE_URL; ?>emprestimo/editar/<?php echo $emprestimo_unico['id'];
