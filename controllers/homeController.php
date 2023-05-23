@@ -19,7 +19,14 @@ class homeController extends controller {
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
 
-        $this->loadTemplate('home', $data);
+        
+        if($u->hasPermission('home_view')){
+            $stc = new Estatistica();
+
+            $data['quantidade_clientes'] = $stc->pegarTodosClientes($u->getCompany());
+            $data['quantidade_emprestimos'] = $stc->pegarTodosEmprestimos($u->getCompany());
+
+        }$this->loadTemplate('home', $data);
     }
 
 }
