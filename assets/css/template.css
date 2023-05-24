@@ -67,6 +67,7 @@ body {
 .menuarea li:nth-child(1) {
 	background-image:url('../images/home.png');
 }
+
 .menuarea li:nth-child(2) {
 	background-image:url('../images/users.png');
 }
@@ -336,6 +337,54 @@ table td {
 .db-info-body {
 	padding:10px;
 }
+.container-obj{
+	color: #1f232a;
+}
+.container-obj-item{
+	display: flex;
+	gap: 0.5rem;
+	max-width: fit-content;
+	flex-wrap: wrap;
+
+}
+.container-obj-item p:nth-child(1){
+	display: flex;
+	font-weight: 700;
+	color: #577dbe;
+	display: flex;
+	background-color: #c6dafc;
+	border: 2px #577dbe solid;
+	max-width: fit-content;
+	padding: 10px 20px 10px 20px;
+	text-align: center;
+	border-radius: 10px;
+}
+.container-obj-item p:nth-child(2){
+	display: flex;
+	font-weight: 700;
+	color: #74be57;
+	display: flex;
+	background-color: #c6fcc6;
+	border: 2px #74be57 solid;
+	max-width: fit-content;
+	padding: 10px 20px 10px 20px;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.container-obj-item p:nth-child(3){
+	display: flex;
+	font-weight: 700;
+	color: #be9a57;
+	display: flex;
+	background-color: #fbfcc6;
+	border: 2px #be9a57 solid;
+	max-width: fit-content;
+	padding: 10px 20px 10px 20px;
+	text-align: center;
+	border-radius: 10px;
+}
+
 hr {
 	display: block;
 	margin-top: 0.5em;
