@@ -47,8 +47,36 @@
 
 
 		<h2>Emprestimos vencidos: </h2>
+		<?php
+		$data_atual = new DateTime(date('Y-m-d'));
+		
+		foreach($quantidade_emprestimos as $atrasado):
+			$data_inicial = new DateTime(date('Y-m-d', strtotime($atrasado['data_emprestimo'])));
 
+		$intervalo = $data_inicial->diff($data_atual);
+		$diferencadias = $intervalo->format('%a');
 
+		$quantidadedemesespagos = $atrasado['qtd_mensalidade'];
+
+		$quantidadediasatraso = $quantidadedemesespagos * 30;
+
+		//uma das condições do if
+		$diastotal =  $diferencadias - $quantidadediasatraso ;
+		if(($diferencadias > $quantidadediasatraso && $diastotal > 30) || ($quantidadedemesespagos == 0 && $diferencadias >= 30)){
+			?>
+
+			<div class="container-obj-item">
+				<p>
+					<?php
+					$pula = "\n";
+					  echo ' DIAS EM ATRASO ', $diastotal;
+					  echo ' VALOR: ', $atrasado['valor_emprestimo'];
+					  ?>
+				</p>
+			</div>
+		<?php } ?>
+			
+		<?php endforeach?>
 		<h2>Perto do vencimento: </h2>
 	</div>
 </body>

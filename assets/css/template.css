@@ -345,7 +345,25 @@ table td {
 	gap: 0.5rem;
 	max-width: fit-content;
 	flex-wrap: wrap;
+}
+.container-erro{
+	display: flex;
+	gap: 0.5rem;
+	max-width: fit-content;
+	flex-wrap: wrap;
 
+}
+.container-erro p{
+	display: flex;
+	font-weight: 700;
+	color: #577dbe;
+	display: flex;
+	background-color: #c6dafc;
+	border: 2px #577dbe solid;
+	max-width: fit-content;
+	padding: 10px 20px 10px 20px;
+	text-align: center;
+	border-radius: 10px;
 }
 .container-obj-item p:nth-child(1){
 	display: flex;

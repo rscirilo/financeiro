@@ -19,6 +19,7 @@
 	<input type="hidden" name="data_emprestimo" value="<?php echo $client_info['data_emprestimo']; ?>">
 	<input type="hidden" name="id_client" value="<?php echo $client_info['id_client']; ?>" />
 	<input type="hidden" name="id_company" value="<?php echo $client_info['id_company']; ?>" />
+	<input type="hidden" name="meses_pagos" value="<?php echo $client_info['qtd_mensalidade']; ?>" />
 	<input type="hidden" name="mensalidade" value="<?php echo $client_info['mensalidade'] ?>">
 
 	<label>Esse é um pagamento ou mensalidade?</label>

@@ -57,8 +57,9 @@ class emprestimoController extends controller {
                 $valor = addslashes($_POST['valor']);
                 $juros = addslashes($_POST['juros']);
                 $divida = 0;
+                $meses_pagos = 0;
                 $dataemprestimo = date('Y-m-d');
-                $emp->add($u->getCompany(), $id, $valor, $juros, $dataemprestimo, $divida);
+                $emp->add($u->getCompany(), $id, $valor, $juros, $dataemprestimo, $divida, $meses_pagos);
                 echo $id;
                 header("Location: ".BASE_URL."/emprestimo");  
             }
@@ -98,13 +99,13 @@ class emprestimoController extends controller {
 
             if($_POST['select'] == "nao"){
                 
-                $emp->quitar($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $emprestimo);
+                $emp->quitar($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $emprestimo, $meses_pagos);
                 header("Location: ".BASE_URL."/emprestimo");  
             }
             else if($_POST['select'] == "sim"){
                 
                 
-                $emp->mensalidade($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $total_mensalidade);
+                $emp->mensalidade($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $total_mensalidade, $meses_pagos);
                 header("Location: ".BASE_URL."/emprestimo");
             }
         }
@@ -135,8 +136,9 @@ class emprestimoController extends controller {
                 $data_emprestimo = addslashes($_POST['data_emprestimo']);
                 $id_company = addslashes($_POST['id_company']);
                 $recebido = addslashes($_POST['recebido']);
+                $meses_pagos = addslashes($_POST['meses_pagos']);
 
-                $emp->edit($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $recebido);
+                $emp->edit($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $recebido, $meses_pagos);
                 header("Location: ".BASE_URL."/emprestimo");  
                  
             }
