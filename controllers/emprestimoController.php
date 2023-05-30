@@ -132,7 +132,7 @@ class emprestimoController extends controller {
             }
         }
     
-        $meses_pagos = $meses_pagos + $qtd_mensalidade;
+        $meses_pagos = $meses_pagos + $qtd_mensalidade + $quitacao_mes;
     
         if ($_POST['select'] == "nao") {
             $valor_emprestimo -= $valor;
