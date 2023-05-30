@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Tempo de geração: 02-Maio-2023 às 05:53
--- Versão do servidor: 5.7.33
--- versão do PHP: 7.4.19
+-- Host: 127.0.0.1
+-- Tempo de geração: 30/05/2023 às 03:43
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,11 +24,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `clients`
+-- Estrutura para tabela `clients`
 --
 
 CREATE TABLE `clients` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `id_company` int(11) NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) DEFAULT NULL,
@@ -41,30 +41,31 @@ CREATE TABLE `clients` (
   `address_state` varchar(50) DEFAULT NULL,
   `address_country` varchar(50) DEFAULT NULL,
   `address_zipcode` varchar(50) DEFAULT NULL,
-  `stars` int(11) NOT NULL DEFAULT '3',
-  `internal_obs` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `stars` int(11) NOT NULL DEFAULT 3,
+  `internal_obs` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `clients`
+-- Despejando dados para a tabela `clients`
 --
 
 INSERT INTO `clients` (`id`, `id_company`, `name`, `email`, `phone`, `address`, `address2`, `address_number`, `address_neighb`, `address_city`, `address_state`, `address_country`, `address_zipcode`, `stars`, `internal_obs`) VALUES
-(1, 1, 'Rodrigo dos Santos Cirilo2', 'rscirilo@gmail.com', '84991369084', 'Rua Eduardo Medeiros', 'teste 112', '25', 'Nova Betânia', 'Mossoró', 'RN', 'Brasil', '59612122', 3, 'Cliente informação 2');
+(1, 1, 'Rodrigo dos Santos Cirilo2', 'rscirilo@gmail.com', '84991369084', 'Rua Eduardo Medeiros', 'teste 112', '25', 'Nova Betânia', 'Mossoró', 'RN', 'Brasil', '59612122', 3, 'Cliente informação 2'),
+(5, 1, 'Artemísia dos', 'artemisiakmds@gmail.com', '84987934150', 'Rua São Cristóvão', 'casa 45', '35', 'Guarapes', 'Natal', 'RN', 'Brasil', '59074876', 4, 'gatinha fiufiu');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `companies`
+-- Estrutura para tabela `companies`
 --
 
 CREATE TABLE `companies` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `companies`
+-- Despejando dados para a tabela `companies`
 --
 
 INSERT INTO `companies` (`id`, `name`) VALUES
@@ -73,23 +74,36 @@ INSERT INTO `companies` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `emprestimo`
+-- Estrutura para tabela `emprestimo`
 --
 
 CREATE TABLE `emprestimo` (
   `id` int(11) NOT NULL,
   `id_company` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `valor_emprestimo` float NOT NULL,
+  `valor_emprestimo` double(10,2) NOT NULL,
   `data_emprestimo` datetime NOT NULL,
-  `juros_mes` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `juros_mes` float NOT NULL,
+  `recebido` float NOT NULL,
+  `mensalidade` float NOT NULL,
+  `qtd_mensalidade` int(11) NOT NULL,
+  `juros_sc` tinyint(1) NOT NULL,
+  `valor_atual` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `emprestimo`
+--
+
+INSERT INTO `emprestimo` (`id`, `id_company`, `id_client`, `valor_emprestimo`, `data_emprestimo`, `juros_mes`, `recebido`, `mensalidade`, `qtd_mensalidade`, `juros_sc`, `valor_atual`) VALUES
+(53, 1, 1, 5000.00, '2023-01-30 00:00:00', 2, 0, 5200, 3, 0, 0.00),
+(54, 1, 5, 123446.00, '2023-05-30 00:00:00', 2, 10, 0, 2, 0, 0.00),
+(55, 1, 5, 3000.00, '2023-05-30 00:00:00', 2, 1760, 380, 11, 1, 0.00);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `estatistica`
+-- Estrutura para tabela `estatistica`
 --
 
 CREATE TABLE `estatistica` (
@@ -99,12 +113,12 @@ CREATE TABLE `estatistica` (
   `total_juros` float NOT NULL,
   `total_recebido` float NOT NULL,
   `total_receber` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `permission_groups`
+-- Estrutura para tabela `permission_groups`
 --
 
 CREATE TABLE `permission_groups` (
@@ -112,30 +126,30 @@ CREATE TABLE `permission_groups` (
   `id_company` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `params` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `permission_groups`
+-- Despejando dados para a tabela `permission_groups`
 --
 
 INSERT INTO `permission_groups` (`id`, `id_company`, `name`, `params`) VALUES
-(1, 1, 'MASTER', '1,2,5,6,7,11'),
-(2, 1, 'ADMIN', '1,7,8,9,10,11');
+(1, 1, 'MASTER', '1,2,5,6,7,11,12,13,14,15,16,17'),
+(2, 1, 'ADMIN', '1,6,7,11,12,13,14,15,16,17');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `permission_params`
+-- Estrutura para tabela `permission_params`
 --
 
 CREATE TABLE `permission_params` (
   `id` int(11) NOT NULL,
   `id_company` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `permission_params`
+-- Despejando dados para a tabela `permission_params`
 --
 
 INSERT INTO `permission_params` (`id`, `id_company`, `name`) VALUES
@@ -144,12 +158,18 @@ INSERT INTO `permission_params` (`id`, `id_company`, `name`) VALUES
 (5, 1, 'nome da permissãp'),
 (6, 1, 'users_view'),
 (7, 1, 'clients_view'),
-(11, 1, 'clients_edit');
+(11, 1, 'clients_edit'),
+(12, 1, 'emprestimo_view'),
+(13, 1, 'emprestimo_add'),
+(14, 1, 'emprestimo_edit'),
+(15, 1, 'emprestimo_quitar'),
+(16, 1, 'home_view'),
+(17, 1, 'estatisticas_view');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -158,10 +178,10 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(32) NOT NULL,
   `id_group` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `users`
+-- Despejando dados para a tabela `users`
 --
 
 INSERT INTO `users` (`id`, `id_company`, `email`, `password`, `id_group`) VALUES
@@ -173,56 +193,58 @@ INSERT INTO `users` (`id`, `id_company`, `email`, `password`, `id_group`) VALUES
 --
 
 --
--- Índices para tabela `clients`
+-- Índices de tabela `clients`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `companies`
+-- Índices de tabela `companies`
 --
 ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `emprestimo`
+-- Índices de tabela `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_emprestimo_cliente` (`id_client`),
+  ADD KEY `fk_emprestimo_company` (`id_company`);
 
 --
--- Índices para tabela `estatistica`
+-- Índices de tabela `estatistica`
 --
 ALTER TABLE `estatistica`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `permission_groups`
+-- Índices de tabela `permission_groups`
 --
 ALTER TABLE `permission_groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `permission_params`
+-- Índices de tabela `permission_params`
 --
 ALTER TABLE `permission_params`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `companies`
@@ -234,7 +256,7 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT de tabela `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de tabela `estatistica`
@@ -252,13 +274,24 @@ ALTER TABLE `permission_groups`
 -- AUTO_INCREMENT de tabela `permission_params`
 --
 ALTER TABLE `permission_params`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `emprestimo`
+--
+ALTER TABLE `emprestimo`
+  ADD CONSTRAINT `fk_emprestimo_cliente` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id`),
+  ADD CONSTRAINT `fk_emprestimo_company` FOREIGN KEY (`id_company`) REFERENCES `companies` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
