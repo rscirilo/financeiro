@@ -7,7 +7,6 @@
     <tr>
         <th>Capital</th>
         <th>Pago</th>
-        <th>atual</th>
         <th>Pago em Mensalidades</th>
         <th>sc</th>
         <th>Ações</th>
@@ -17,7 +16,6 @@
         <tr>
             <td><?php echo $emprestimo_unico['valor_emprestimo'] ?></td>
             <td><?php echo $emprestimo_unico['recebido'] ?></td>
-            <td><?php echo $emprestimo_unico['valor_atual'] ?></td>
             <td><?php echo $emprestimo_unico['mensalidade']?></td>
             <td><?php echo $emprestimo_unico['juros_sc'] ?></td>
             <td>

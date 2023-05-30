@@ -119,28 +119,36 @@ class emprestimoController extends controller {
 
                 $meses_atrasados = $diferencameses - $meses_pagos;
 
-
-
+                if($meses_atrasados > $meses_pagos){
+                    $meses_atrasados = $meses_atrasados - $meses_pagos;
+                
                 $juros_por_mes = array();
-                if($meses_atrasados > 1){
                     for($mes = 1; $mes <= $meses_atrasados; $mes++) {
                     $montante_mes = $capital * pow(1 + $taxa_juros, $mes);
                     $juros_m = $montante_mes - $capital;
                     $juros_por_mes[$mes] = $juros_m;
                     }
                 }
-                else if($meses_atrasados <= 1){
-                    $total_mensalidade = $valor_emprestimo * $juros_mes/100;
-                }
-                
-
-                
+                else{
+                    if($meses_pagos > 0){
+                        $total_mensalidade = ($valor_emprestimo * $juros_mes/100) * $meses_pagos;
+                    }
+                    else{
+                        $total_mensalidade = $valor_emprestimo * $juros_mes/100;
+                    }
+               }
                 $total_mensalidade = isset($juros_por_mes[$meses_atrasados]) ? $juros_por_mes[$meses_atrasados] : 0; // Valor dos juros do mês especificado, ou 0 se não existir
             }
 
 
             else if($juros_sc == 1){ //simples
-                $total_mensalidade = $valor_emprestimo * $juros_mes/100;
+                
+                if($meses_pagos > 0){
+                    $total_mensalidade = ($valor_emprestimo * $juros_mes/100) * $meses_pagos;
+                }
+                else{
+                    $total_mensalidade = $valor_emprestimo * $juros_mes/100;
+                }
             }
 
             $meses_pagos = $meses_pagos + $qtd_mensalidade;
@@ -152,6 +160,7 @@ class emprestimoController extends controller {
             else if($_POST['select'] == "sim"){
                 if($mensalidade > 0){
                 $total_mensalidade = $total_mensalidade + $mensalidade;
+                //$valor_emprestimo = $valor_emprestimo - $valor;
                 }
                 $emp->mensalidade($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $total_mensalidade, $meses_pagos, $capital);
                 header("Location: ".BASE_URL."/emprestimo");

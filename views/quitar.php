@@ -47,7 +47,6 @@
 <!-- fim -->
 	<input type="hidden" name="juros_mes" value="<?php echo $client_info['juros_mes'];?>">
 	<input type="hidden" name="recebido" value="<?php echo $client_info['recebido'];?>">
-	<input type="hidden" name="valor_atual" value="<?php echo $client_info['valor_atual']?>">
 	<input type="hidden" name="qtd_mensalidade" value="<?php echo $client_info['qtd_mensalidade'];?>">
 	<input type="hidden" name="valor_emprestimo" value="<?php echo $client_info['valor_emprestimo']?>"/><br/><br/>
 	<input type="hidden" name="data_emprestimo" value="<?php echo $client_info['data_emprestimo']; ?>">
