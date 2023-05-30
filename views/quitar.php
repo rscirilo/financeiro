@@ -17,10 +17,13 @@
 		$diferenca_meses = $intervalo->m + ($intervalo->y * 12);
 
 		if($diferenca_meses > $client_info['qtd_mensalidade']){
+			if($client_info['qtd_mensalidade'] == 0){
+				$a = $capital * $taxa_juros;
+			}
 			$quitacao_mes = $diferenca_meses - $client_info['qtd_mensalidade'];
 			$montante = $capital * pow(1 + $taxa_juros, $quitacao_mes);
 			$juros_total = $montante - $capital;
-			$total_mensalidade = $juros_total;
+			$total_mensalidade = $juros_total + $a;
 		}
 		else{
 			$total_mensalidade = $client_info['valor_emprestimo'] * $client_info['juros_mes'] / 100;

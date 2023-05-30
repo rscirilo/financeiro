@@ -129,6 +129,10 @@ class emprestimoController extends controller {
                 else{
                     $total_mensalidade = $valor_emprestimo * $juros_mes / 100;
                 }
+                if($meses_pagos > 0){
+                    $total_mensalidade = $total_mensalidade * $meses_pagos;
+
+                }
             } else if ($juros_sc == 1) { 
                 if ($meses_pagos > 0) {
                 $total_mensalidade = ($valor_emprestimo * $juros_mes / 100) * $meses_pagos;
