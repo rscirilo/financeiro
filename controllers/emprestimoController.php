@@ -114,13 +114,18 @@ class emprestimoController extends controller {
                 $data_inicial = new DateTime(date('Y-m-d', strtotime($data_emprestimo)));
                 $intervalo = $data_inicial->diff($data_atual);
                 $diferenca_meses = $intervalo->m + ($intervalo->y * 12);
-    
+
+                
                 if($diferenca_meses > $qtd_mensalidade){
+                    if($qtd_mensalidade == 0){
+                        $a = $capital * $taxa_juros;
+                    }
                     $quitacao_mes = $diferenca_meses - $qtd_mensalidade;
                     $montante = $capital * pow(1 + $taxa_juros, $quitacao_mes);
                     $juros_total = $montante - $capital;
-                    $total_mensalidade = $juros_total;
+                    $total_mensalidade = $juros_total + $a;
                 }
+                
                 else{
                     $total_mensalidade = $valor_emprestimo * $juros_mes / 100;
                 }

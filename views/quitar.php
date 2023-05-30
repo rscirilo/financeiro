@@ -85,5 +85,5 @@
 </form>
 
 <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_quitacao.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script>
+<!-- <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script> -->
 <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script>
