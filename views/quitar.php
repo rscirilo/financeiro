@@ -10,29 +10,34 @@
 	if ($client_info['juros_sc'] == 0) { // composto
 		$capital = $client_info['valor_emprestimo'];
 		$taxa_juros = $client_info['juros_mes'] / 100;
-		$tempo = $client_info['qtd_mensalidade'];
-	
-		$juros_por_mes = array(); // Array para armazenar os valores dos juros por mês
-	
-		for ($mes = 1; $mes <= $tempo; $mes++) {
-			$montante_mes = $capital * pow(1 + $taxa_juros, $mes);
-			$juros_mes = $montante_mes - $capital;
-			$juros_por_mes[$mes] = $juros_mes;
+		$data_atual = new DateTime(date('Y-m-d'));
+		$data = $client_info['data_emprestimo'];
+		$data_inicial = new DateTime(date('Y-m-d', strtotime($data)));
+		$intervalo = $data_inicial->diff($data_atual);
+		$diferenca_meses = $intervalo->m + ($intervalo->y * 12);
+
+		if($diferenca_meses > $client_info['qtd_mensalidade']){
+			$quitacao_mes = $diferenca_meses - $client_info['qtd_mensalidade'];
+			$montante = $capital * pow(1 + $taxa_juros, $quitacao_mes);
+			$juros_total = $montante - $capital;
+			$total_mensalidade = $juros_total;
 		}
-	
-		$juros = isset($juros_por_mes[$tempo]) ? $juros_por_mes[$tempo] : 0; // Valor dos juros do mês especificado, ou 0 se não existir
+		else{
+			$total_mensalidade = $client_info['valor_emprestimo'] * $client_info['juros_mes'] / 100;
+		}
 	}
 
 
 
 	else if($client_info['juros_sc'] == 1){ //simples
-		$juros = $client_info['valor_emprestimo'] * $client_info['juros_mes']/100;
+			$total_mensalidade = $client_info['valor_emprestimo'] * $client_info['juros_mes']/100;
+		
 	}
 
 
 
 ?>
-<p>juros mensalidade a pagar: <?php echo sprintf("%.2f", $juros); ?></p>
+<p>juros mensalidade a pagar: <?php echo sprintf("%.2f", $total_mensalidade); ?></p>
 
 <hr/>
 <!-- CALCULO DO JUROS COMPOSTO E SIMPLES -->
