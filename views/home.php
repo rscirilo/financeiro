@@ -69,7 +69,7 @@
 				<p>
 					<?php
 					$pula = "\n";
-					  echo ' DIAS EM ATRASO ', $diastotal;
+					  echo ' DIAS EM ATRASO: ', $diastotal;
 					  echo ' VALOR: ', $atrasado['valor_emprestimo'];
 					  ?>
 				</p>
@@ -77,6 +77,43 @@
 		<?php } ?>
 			
 		<?php endforeach?>
-		<h2>Perto do vencimento: </h2>
+
+		<!-- ESSA PARTE TA COMENTADA PARA ARRUMAR DEPOIS -->
+
+
+
+		<!-- <h2>Perto do vencimento: </h2>
+		<?php
+		$data_atual = new DateTime(date('Y-m-d'));
+		
+		foreach($quantidade_emprestimos as $atrasado):
+			$data_inicial = new DateTime(date('Y-m-d', strtotime($atrasado['data_emprestimo'])));
+
+		$intervalo = $data_inicial->diff($data_atual);
+		$diferencadias = $intervalo->format('%a');
+
+		$quantidadedemesespagos = $atrasado['qtd_mensalidade'];
+
+		$quantidadediasatraso = $quantidadedemesespagos * 30;
+
+		//uma das condições do if
+		$diastotal =  $diferencadias - $quantidadediasatraso ;
+		if((($quantidadedemesespagos == 0) && ($diferencadias >= 20 && $diferencadias < 30))){
+			?>
+
+			<div class="container-obj-item">
+				<p>
+					<?php
+					$pula = "\n";
+					  echo ' FALTAM ', 30 - $diastotal, ' DIAS';
+					  echo ' VALOR: ', $atrasado['valor_emprestimo'];
+					  ?>
+				</p>
+			</div>
+		<?php } ?>
+			
+		<?php endforeach?> -->
+
+		<!-- FIM DO COMENTÁRIOD -->
 	</div>
 </body>

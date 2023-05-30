@@ -9,6 +9,13 @@
 	<label for="valor">Valor</label><br/>
 	<input type="text" name="valor" required /><br/><br/>
 
+	<label for="juros_s">Juros Simples ou Composto?</label>
+
+	<select name="juros_sc" id="juros_sc">
+		<option value="simples">simples</option>
+		<option value="composto">composto</option>
+	</select><br/><br/>
+
 	<label for="juros">Juros</label><br/>
 	<input type="text" name="juros" /><br/><br/>
 
@@ -21,5 +28,5 @@
 
 </form>
 
-<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script>
+<!-- <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script> -->
