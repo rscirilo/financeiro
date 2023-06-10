@@ -10,7 +10,7 @@
         <th>Pago</th>
         <th>Pago em Mensalidades</th>
         <!-- <th>sc</th> -->
-        <th>mensalidades</th>
+        <th>mensalidades pagas</th>
         <th>Ações</th>
         
     </tr>
