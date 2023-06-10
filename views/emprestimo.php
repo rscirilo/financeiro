@@ -8,7 +8,7 @@
         <th>Capital</th>
         <th>Pago</th>
         <th>Pago em Mensalidades</th>
-        <th>sc</th>
+        <!-- <th>sc</th> -->
         <th>mensalidades</th>
         <th>Ações</th>
         
@@ -18,7 +18,7 @@
             <td><?php echo $emprestimo_unico['valor_emprestimo'] ?></td>
             <td><?php echo $emprestimo_unico['recebido'] ?></td>
             <td><?php echo $emprestimo_unico['mensalidade']?></td>
-            <td><?php echo $emprestimo_unico['juros_sc'] ?></td>
+            <!-- <td><?php echo $emprestimo_unico['juros_sc'] ?></td> -->
             <td><?php echo $emprestimo_unico['qtd_mensalidade'] ?></td>
             <td>
                 <div class="button button_small">
