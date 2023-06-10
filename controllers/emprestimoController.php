@@ -23,8 +23,16 @@ class emprestimoController extends controller {
             $emp = new Emprestimo();
             $offset = 0;
 
+
+            
             $data['emprestimo_list'] = $emp->getList($offset, $u->getCompany());
             
+            $client = new Clients();
+            foreach ($data['emprestimo_list'] as $emprestimo) {
+                $clientInfo = $client->getInfo($emprestimo['id_client'], $u->getCompany());
+                $data['client_name'] = $clientInfo['name'];
+            }
+
             $data['edit_permission'] = $u->hasPermission('emprestimo_edit');
             $data['add_permission'] = $u->hasPermission('emprestimo_add');
             

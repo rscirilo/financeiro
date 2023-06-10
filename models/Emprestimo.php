@@ -28,6 +28,15 @@ class Emprestimo extends model{
     
         return $array;
     }
+    public function getListNomeUnique($id, $id_company){
+        $array = array();
+        $sql = $this->db->prepare("SELECT * FROM clients WHERE id_company = :id_company AND id = :id");
+        $sql->bindValue(':id_company', $id_company);
+        $sql->execute();
+        $array = $sql->fetchAll();
+    
+        return $array;
+    }
 
     public function getInfo($id, $id_company) {
 		$array = array();

@@ -5,6 +5,7 @@
 <?php endif; ?>
 <table border="0" width="100%">
     <tr>
+        <th>Cliente</th>
         <th>Capital</th>
         <th>Pago</th>
         <th>Pago em Mensalidades</th>
@@ -15,6 +16,14 @@
     </tr>
     <?php foreach($emprestimo_list as $emprestimo_unico):?>
         <tr>
+            <td>
+            <?php
+                $client = new Clients();
+                    $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
+                    $data['client_name'] = $clientInfo['name'];
+                echo $data['client_name'];
+                ?>
+            </td>
             <td><?php echo $emprestimo_unico['valor_emprestimo'] ?></td>
             <td><?php echo $emprestimo_unico['recebido'] ?></td>
             <td><?php echo $emprestimo_unico['mensalidade']?></td>
