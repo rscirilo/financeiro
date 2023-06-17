@@ -1,4 +1,8 @@
-<h1>editar dívida</h1>
+<head>
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/template.css">
+</head>
+<body>
+	<h1>Editar dívida</h1>
 <?php if(isset($error_msg) && !empty($error_msg)): ?>
 <div class="warn"><?php echo $error_msg; ?></div>
 <?php endif; ?>
@@ -22,6 +26,8 @@
 	<input type="submit" value="Editar" />
 
 </form>
+
+</body>
 
 <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script>

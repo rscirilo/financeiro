@@ -1,3 +1,8 @@
+<head>
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/template.css">
+</head>
+<body>
+	
 <?php if(isset($error_msg) && !empty($error_msg)): ?>
 <div class="warn"><?php echo $error_msg; ?></div>
 <?php endif; ?>
@@ -86,6 +91,7 @@
 
 <input type="submit" id="submit" class="submit" value="Adicionar pagamento" />
 </form>
+</body>
 
 <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_quitacao.js"></script>
 <!-- <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script> -->

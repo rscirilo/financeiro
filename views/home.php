@@ -1,11 +1,12 @@
 <head>
 	<link rel="stylesheet" href="assets/css/template.css">
 </head>
-<h1>Home</h1>
+
 <body>
+	<!-- <h1>Home</h1> -->
 	<div class="container-obj">
 
-		<h2>Sobre seus clientes</h2>
+		<!-- <h2>Sobre seus clientes</h2> -->
 		<?php
 		$count_clients = 0;
 		foreach($quantidade_clientes as $client):

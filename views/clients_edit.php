@@ -1,3 +1,8 @@
+<head>
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/template.css">
+</head>
+<body>
+	
 <h1>Clientes - Editar</h1>
 
 <?php if(isset($error_msg) && !empty($error_msg)): ?>
@@ -55,5 +60,6 @@
 	<input type="submit" value="Salvar" >
 
 </form>
+</body>
 
 <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/script_clients_add.js"></script>

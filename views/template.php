@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Painel - <?php echo $viewData['company_name']; ?></title>
-        <link href="<?php echo BASE_URL; ?>/assets/css/template.css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/css/template.css">        
         <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript">var BASE_URL = '<?php echo BASE_URL; ?>';</script>
         <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
@@ -12,6 +12,10 @@
             <div class="company_name">
                 <?php echo $viewData['company_name']; ?>
             </div><!--company_name-->
+            <div class="topo-sair">
+                    <div><a href="<?php echo BASE_URL.'/login/logout'; ?>">Sair</a></div>
+                    <div><?php echo $viewData ['user_email']; ?></div>
+                </div><!--topo-->
             <div class="menuarea">
                 <ul>
                     <li><a href="<?php echo BASE_URL; ?>">Home</a></li>
@@ -26,14 +30,9 @@
             </div><!--menuarea-->
         </div><!--leftmenu-->
 
-        <div class="container">
-            <div class="top">
-                <div class="top_right"><a href="<?php echo BASE_URL.'/login/logout'; ?>">Sair</a></div>
-                <div class="top_right"><?php echo $viewData ['user_email']; ?></div>
-            </div><!--topo-->
-            <div class="area">
+        
+         <div class="area">
                 <?php $this->loadViewInTemplate($viewName, $viewData); ?>
             </div><!--area-->
-         </div><!--container-->
     </body>
 </html>

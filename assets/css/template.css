@@ -4,18 +4,34 @@ body {
 	font-size:13px;
 	font-family:Arial;
 }
+h1{
+	color: #015345;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	align-items: center;
+}
+.topo-sair{
+	display: flex;
+	flex-direction: row;
+	color: white;
+	gap: 15%;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
 .leftmenu {
-	width:200px;
-	background-color:#1f232a;
-	position:fixed;
-	left:0;
-	top:0;
-	bottom:0;
+	width:100%;
+	align-items: center;
+	justify-content: center;
+	background-color:#015345;
+}
+.leftmenu a{
+	color: white;
+	font-size: 1.2rem;
+	text-decoration: none;
 }
 .company_name {
-	height:100px;
-	line-height: 100px;
-	font-size:18px;
+	padding: 20px;
+	font-size: 1.2rem;
 	color:#FFF;
 	text-align: center;
 }
@@ -23,7 +39,6 @@ body {
 	padding-left:200px;
 }
 .top {
-	height:40px;
 	background-color:#232830;
 	color:#FFF;
 	font-size:13px;
@@ -41,23 +56,36 @@ body {
 }
 .menuarea {
 	color:#FFF;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
 }
 .menuarea ul {
 	margin:0;
 	padding:0;
 	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 5%;
+	flex-direction: row;
 }
 .menuarea li {
 	height:40px;
 	line-height: 40px;
 	font-size:12px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 	padding-left:30px;
 	background-size:10px 10px;
 	background-repeat: no-repeat;
 	background-position: 10px 14px;
 }
 .menuarea li:hover {
-	background-color:#000;
+	text-decoration: underline 2px;
+	
 }
 .menuarea li a {
 	color:#FFF;
@@ -134,9 +162,9 @@ textarea {
 input[type=submit],
 button,
 .button {
-	border:0px;
-	background-color:#224074;
-	color:#FFF;
+	border:1px solid #5d7507;
+	background-color:#afd4b5;
+	color:#5d7507;
 	height:40px;
 	line-height: 40px;
 	border-radius:3px;
@@ -151,7 +179,8 @@ button,
 	line-height: 30px;
 }
 .button a {
-	color:#FFF;
+	color:#5d7507;
+	font-weight: 500;
 	text-decoration: none;
 }
 table {
@@ -159,7 +188,6 @@ table {
 }
 table th {
 	height:40px;
-	line-height: 40px;
 	background-color:#DDD;
 	text-align: left;
 	padding-left:10px;
@@ -169,7 +197,6 @@ table td {
 	height:40px;
 	line-height: 40px;
 	background-color:#EEE;
-	text-align: left;
 	padding-left:10px;
 	padding-right: 10px;
 }
@@ -203,7 +230,7 @@ table td {
 	text-decoration: none;
 }
 .pag_ativo {
-	background-color:#224074;
+	background-color:#015345;
 }
 .pag_ativo a {
 	color:#FFF;
@@ -359,7 +386,7 @@ table td {
 	color: #577dbe;
 	display: flex;
 	background-color: #c6dafc;
-	border: 2px #577dbe solid;
+	border: 2px #5d7507 solid;
 	max-width: fit-content;
 	padding: 10px 20px 10px 20px;
 	text-align: center;
@@ -368,39 +395,39 @@ table td {
 .container-obj-item p:nth-child(1){
 	display: flex;
 	font-weight: 700;
-	color: #577dbe;
+	color: #5d7507;
 	display: flex;
-	background-color: #c6dafc;
-	border: 2px #577dbe solid;
+	background-color: #d8e7a6;
+	border: 2px #5d7507 solid;
 	max-width: fit-content;
 	padding: 10px 20px 10px 20px;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 7px;
 }
 .container-obj-item p:nth-child(2){
 	display: flex;
 	font-weight: 700;
-	color: #74be57;
+	color: #5d7507;
 	display: flex;
-	background-color: #c6fcc6;
-	border: 2px #74be57 solid;
+	background-color: #afd4b5;
+	border: 2px #5d7507 solid;
 	max-width: fit-content;
 	padding: 10px 20px 10px 20px;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 7px;
 }
 
 .container-obj-item p:nth-child(3){
 	display: flex;
 	font-weight: 700;
-	color: #be9a57;
+	color: #015345;
 	display: flex;
-	background-color: #fbfcc6;
-	border: 2px #be9a57 solid;
+	background-color: #95c9bc;
+	border: 2px #015345 solid;
 	max-width: fit-content;
 	padding: 10px 20px 10px 20px;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 7px;
 }
 
 hr {

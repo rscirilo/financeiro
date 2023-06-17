@@ -1,8 +1,15 @@
+<head>
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/template.css">
+</head>
+<body>
 <h1>Emprestimo - Adicionar</h1>
 
 <?php if(isset($error_msg) && !empty($error_msg)): ?>
 <div class="warn"><?php echo $error_msg; ?></div>
 <?php endif; ?>
+
+
+	
 
 <form class="form" method="POST">
 
@@ -27,6 +34,6 @@
 	<input type="submit" value="Adicionar" />
 
 </form>
-
-<!-- <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script> -->
+</body>
+<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/jquery.mask.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script>
