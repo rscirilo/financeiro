@@ -28,7 +28,7 @@ class ajaxController extends controller {
     		foreach($clients as $citem) {
     			$data[] = array(
     				'name' => $citem['name'],
-    				'link' => BASE_URL.'/clients/edit/'.$citem['id'],
+    				'link' => BASE_URL.'/clients/visualizar/'.$citem['id'],
                     'id'   => $citem['id']
     			);
     		}

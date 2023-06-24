@@ -114,7 +114,25 @@ class clientsController extends controller {
         } else {
             header("Location: ".BASE_URL."/clients");
         }
-    } 
+    }
+    public function visualizar($id){
+        $data = array();
+        $u = new Users();
+        $u->setLoggedUser();
+        $company = new Companies($u->getCompany());
+        $data['company_name'] = $company->getName();
+        $data['user_email'] = $u->getEmail();
+
+        if($u->hasPermission('clients_view')) {
+            $c = new Clients();
+            $stc= new Estatistica();
+            $data['quantidade_emprestimos'] = $stc->pegarTodosEmprestimos($u->getCompany());
+
+            }
+
+            $data['client_info'] = $c->getInfo($id, $u->getCompany());
+            $this->loadTemplate('client_visualizar_dados', $data);
+    }
 
     public function delete($id) {
 		# code...

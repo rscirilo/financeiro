@@ -171,12 +171,14 @@ button,
 	padding-left:20px;
 	padding-right:20px;
 	cursor:pointer;
-	font-size:13px;
+	font-size:11px;
 	display: inline-block;
 }
 .button_small {
-	height:30px;
-	line-height: 30px;
+	height:25px;
+	gap: 1rem;
+	margin-bottom: 10px;
+	line-height: 25px;
 }
 .button a {
 	color:#5d7507;

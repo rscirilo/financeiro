@@ -26,6 +26,7 @@
 				<?php if($edit_permission): ?>
 					<div class="button button_small"><a href="<?php echo BASE_URL; ?>clients/edit/<?php echo $c['id']; ?>">Editar</a></div>
 					<div class="button button_small"><a href="<?php echo BASE_URL; ?>clients/delete/<?php echo $c['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a></div>
+					<div class="button button_small"><a href="<?php echo BASE_URL; ?>clients/visualizar/<?php echo $c['id']; ?>">Visualizar</a></div>
 				<?php else: ?>
 					<div class="button button_small"><a href="<?php echo BASE_URL; ?>clients/view/<?php echo $c['id']; ?>">Visualizar</a></div>
 				<?php endif; ?>
