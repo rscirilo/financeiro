@@ -45,7 +45,7 @@
 
 
 ?>
-<p>juros mensalidade a pagar: <?php echo sprintf("%.2f", $total_mensalidade); ?></p>
+<p>juros mensalidade a pagar: <?php echo number_format(sprintf("%.2f", $total_mensalidade),2,',','.'); ?></p>
 
 <hr/>
 <!-- CALCULO DO JUROS COMPOSTO E SIMPLES -->

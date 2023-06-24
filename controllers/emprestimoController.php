@@ -65,7 +65,13 @@ class emprestimoController extends controller {
                 $valor = addslashes($_POST['valor']);
                 $juros = addslashes($_POST['juros']);
                 $juros_sc = addslashes($_POST['juros_sc']);
-                
+
+
+                $valor = str_replace('.', '', $valor);
+                $valor = str_replace(',', '.', $valor);
+
+                $valor = floatval($valor);
+
                 $divida = 0;
                 $meses_pagos = 0;
                 $dataemprestimo = date('Y-m-d');
@@ -101,6 +107,10 @@ class emprestimoController extends controller {
         if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
             $valor_emprestimo = (int) addslashes($_POST['valor_emprestimo']);
             $valor = (int) addslashes($_POST['valor']);
+            $valor = str_replace('.', '', $valor);
+            $valor = str_replace(',', '.', $valor);
+
+            $valor = floatval($valor);
             $juros_mes = (int) addslashes($_POST['juros_mes']);
             $id_client = addslashes($_POST['id_client']);
             $data_emprestimo = addslashes($_POST['data_emprestimo']);
@@ -184,6 +194,11 @@ class emprestimoController extends controller {
             $this->loadTemplate('emprestimo_edit', $data);
             if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
                 $valor_emprestimo = addslashes($_POST['valor_emprestimo']);
+
+                $valor_emprestimo = str_replace('.', '', $valor);
+                $valor_emprestimo = str_replace(',', '.', $valor);
+
+                $valor_emprestimo = floatval($valor_emprestimo);
                 $juros_mes = addslashes($_POST['juros_mes']);
                 $id_client = addslashes($_POST['id_client']);
                 $data_emprestimo = addslashes($_POST['data_emprestimo']);

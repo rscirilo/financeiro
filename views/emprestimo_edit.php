@@ -11,7 +11,7 @@
 
 	<label for="valor">Valor</label><br/>
 	<input type="hidden" name="id" id="id" value="<?php echo $emp_info['id'];?>" />
-	<input type="text" name="valor_emprestimo" value="<?php echo $emp_info['valor_emprestimo']?>"/><br/><br/>
+	<input type="text" name="valor_emprestimo" value="<?php echo number_format($emp_info['valor_emprestimo'],2,',','.');?>"/><br/><br/>
 	<input type="hidden" name="data_emprestimo" value="<?php echo $emp_info['data_emprestimo']; ?>">
 	<input type="hidden" name="id_client" value="<?php echo $emp_info['id_client']; ?>" />
 	<input type="hidden" name="meses_pagos" value=<?php echo $emp_info['qtd_mensalidade']?>/>

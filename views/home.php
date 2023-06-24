@@ -41,9 +41,9 @@
 		<!-- PEGAR QUANTO FOI EMPRESTADO NO TOTAL, RECEBIDO NO TOTAL, CREDITO -->
 		<h2>Sobre seus Emprestimos</h2>
 		<div class="container-obj-item">
-		<p class="">Total Emprestado:</br> <?php echo $emprestado?> </p>
-		<p>Recebido no total:</br><?php echo $recebido + $mensalidade?> </p>
-		<p class="lucro">Lucro total:</br><?php echo $lucro ?></p>
+		<p class="">Total Emprestado:</br> <?php echo number_format($emprestado,2,',','.')?> </p>
+		<p>Recebido no total:</br><?php echo number_format($recebido + $mensalidade,2,',','.')?> </p>
+		<p class="lucro">Lucro total:</br><?php echo number_format($lucro,2,',','.') ?></p>
 		</div>
 
 
@@ -71,7 +71,7 @@
 					<?php
 					$pula = "\n";
 					  echo ' DIAS EM ATRASO: ', $diastotal;
-					  echo ' VALOR: ', $atrasado['valor_emprestimo'];
+					  echo ' VALOR: ', number_format($atrasado['valor_emprestimo'],2,',','.');
 					  ?>
 				</p>
 			</div>

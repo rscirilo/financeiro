@@ -28,8 +28,8 @@
                 echo $data['client_name'];
                 ?>
             </td>
-            <td><?php echo $emprestimo_unico['valor_emprestimo'] ?></td>
-            <td><?php echo $emprestimo_unico['recebido'] +  $emprestimo_unico['mensalidade']?></td>
+            <td><?php echo number_format($emprestimo_unico['valor_emprestimo'],2,',','.') ?></td>
+            <td><?php echo number_format($emprestimo_unico['recebido']+  $emprestimo_unico['mensalidade'],2,',','.') ?></td>
             <!-- <td><?php echo $emprestimo_unico['mensalidade']?></td> -->
             <!-- <td><?php echo $emprestimo_unico['juros_sc'] ?></td> -->
             <!-- <td><?php echo $emprestimo_unico['qtd_mensalidade'] ?></td> -->
