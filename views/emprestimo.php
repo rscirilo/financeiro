@@ -57,8 +57,8 @@
 <table border="0" width="100%">
     <tr>
         <th>Cliente</th>
-        <th>Capital</th>
-        <th>Pago</th>
+        <th>Valor recebido</th>
+        <th>Data do emprestimo</th>
         <!-- <th>Pago em Mensalidades</th> -->
         <!-- <th>sc</th> -->
         <!-- <th>mensalidades pagas</th> -->
@@ -77,8 +77,8 @@
                 echo $data['client_name'];
                 ?>
             </td>
-            <td><?php echo number_format($emprestimo_unico['valor_emprestimo'],2,',','.') ?></td>
-            <td><?php echo number_format($emprestimo_unico['recebido']+  $emprestimo_unico['mensalidade'],2,',','.') ?></td>
+            <td><?php echo number_format($emprestimo_unico['recebido'] + $emprestimo_unico['mensalidade'],2,',','.') ?></td>
+            <td><?php echo date('d/m/Y', strtotime($emprestimo_unico['data_emprestimo'])); ?></td>
             <!-- <td><?php echo $emprestimo_unico['mensalidade']?></td> -->
             <!-- <td><?php echo $emprestimo_unico['juros_sc'] ?></td> -->
             <!-- <td><?php echo $emprestimo_unico['qtd_mensalidade'] ?></td> -->
