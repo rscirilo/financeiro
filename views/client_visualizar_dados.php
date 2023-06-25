@@ -37,6 +37,6 @@ foreach($quantidade_emprestimos as $emprestimos):
 endforeach;
 	?>
 	<p>Esse cliente já fez <?php echo $emprestimos_totais ?> empréstimos mas só tem <?php echo $emprestimos_totais - $emprestimos_devendo ?> pagos</p>
-	<p>Seu lucro atual com esse cliente é <?php echo $total_lucro?></p>
+	<p>Seu lucro atual com esse cliente é <?php echo number_format($total_lucro,2,',','.')?></p>
 </body>
 

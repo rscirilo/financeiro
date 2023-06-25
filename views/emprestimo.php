@@ -7,6 +7,7 @@
 <div class="button"><a href="<?php echo BASE_URL;?>/emprestimo/add">Adicionar Emprestimo</a></div>
 
 <?php endif; ?>
+<h2>Emprestimos em curso</h2>
 <table border="0" width="100%">
     <tr>
         <th>Cliente</th>
@@ -19,9 +20,12 @@
         
     </tr>
     <?php foreach($emprestimo_list as $emprestimo_unico):?>
-        <tr>
-            <td>
-            <?php
+        <?php
+            if($emprestimo_unico['valor_emprestimo'] > 0):
+                ?>
+                <tr>
+                <td>
+            <?php 
                 $client = new Clients();
                     $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
                     $data['client_name'] = $clientInfo['name'];
@@ -45,6 +49,41 @@
             </td>
 
         </tr>
+        <?php endif; ?>
+
+    <?php endforeach;?>
+</table>
+<h2>Já finalizados</h2>
+<table border="0" width="100%">
+    <tr>
+        <th>Cliente</th>
+        <th>Capital</th>
+        <th>Pago</th>
+        <!-- <th>Pago em Mensalidades</th> -->
+        <!-- <th>sc</th> -->
+        <!-- <th>mensalidades pagas</th> -->
+        
+    </tr>
+    <?php foreach($emprestimo_list as $emprestimo_unico):?>
+        <?php
+            if($emprestimo_unico['valor_emprestimo'] == 0):
+                ?>
+                <tr>
+                <td>
+            <?php 
+                $client = new Clients();
+                    $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
+                    $data['client_name'] = $clientInfo['name'];
+                echo $data['client_name'];
+                ?>
+            </td>
+            <td><?php echo number_format($emprestimo_unico['valor_emprestimo'],2,',','.') ?></td>
+            <td><?php echo number_format($emprestimo_unico['recebido']+  $emprestimo_unico['mensalidade'],2,',','.') ?></td>
+            <!-- <td><?php echo $emprestimo_unico['mensalidade']?></td> -->
+            <!-- <td><?php echo $emprestimo_unico['juros_sc'] ?></td> -->
+            <!-- <td><?php echo $emprestimo_unico['qtd_mensalidade'] ?></td> -->
+        </tr>
+        <?php endif; ?>
 
     <?php endforeach;?>
 </table>
