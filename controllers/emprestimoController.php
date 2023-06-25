@@ -195,8 +195,8 @@ class emprestimoController extends controller {
             if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
                 $valor_emprestimo = addslashes($_POST['valor_emprestimo']);
 
-                $valor_emprestimo = str_replace('.', '', $valor);
-                $valor_emprestimo = str_replace(',', '.', $valor);
+                $valor_emprestimo = str_replace('.', '', $valor_emprestimo);
+                $valor_emprestimo = str_replace(',', '.', $valor_emprestimo);
 
                 $valor_emprestimo = floatval($valor_emprestimo);
                 $juros_mes = addslashes($_POST['juros_mes']);
