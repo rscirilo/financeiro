@@ -2,8 +2,8 @@
 class Core {
 
 	public function run() {
-        $url = explode('index.php', $_SERVER['PHP_SELF']);
-        $url = end($url);
+        
+		$url = '/'.(!empty($_GET['url'])?$_GET['url']:'');
         
 		$params = array();
 		if(!empty($url) && $url != '/') {

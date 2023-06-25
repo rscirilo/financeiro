@@ -1,5 +1,5 @@
 <?php
-class model {
+class Model {
 	
 	protected $db;
 

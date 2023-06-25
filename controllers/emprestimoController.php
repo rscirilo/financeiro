@@ -1,5 +1,5 @@
 <?php
-class emprestimoController extends controller {
+class emprestimoController extends Controller {
 
     public function __construct() {
         parent::__construct();

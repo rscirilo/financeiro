@@ -1,6 +1,6 @@
 <?php 
 
-class Estatistica extends model{
+class Estatistica extends Model{
     public function pegarTodosClientes($id_company){
         $array = array();
         $sql = $this->db->prepare("SELECT * FROM clients WHERE id_company = :id_company");

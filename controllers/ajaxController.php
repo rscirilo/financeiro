@@ -1,5 +1,5 @@
 <?php
-class ajaxController extends controller {
+class ajaxController extends Controller {
 
 	public function __construct() {
         parent::__construct();

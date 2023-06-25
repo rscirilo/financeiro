@@ -1,5 +1,5 @@
 <?php
-class Clients extends model{
+class Clients extends Model{
 
 	public function getList($offset, $id_company) {
 		$array = array();

@@ -1,7 +1,7 @@
 <?php
 
 
-class Emprestimo extends model{
+class Emprestimo extends Model{
 
     //PEGA LISTA DE EMPRESTIMOS DA COMPANIA
     public function getList($offset, $id_company){

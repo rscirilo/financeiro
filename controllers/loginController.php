@@ -1,5 +1,5 @@
 <?php 
-class loginController extends controller {
+class loginController extends Controller {
 
 	public function index(){
 		$data = array();

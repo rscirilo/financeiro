@@ -1,6 +1,6 @@
 <?php
 // construção do view e permissão de acesso a página//
-class exemploController extends controller{
+class exemploController extends Controller{
 
     public function __construct() {
         parent::__construct();

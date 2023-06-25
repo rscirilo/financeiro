@@ -1,5 +1,5 @@
 <?php
-class Companies extends model{
+class Companies extends Model{
 
 	private $companyInfo;
 

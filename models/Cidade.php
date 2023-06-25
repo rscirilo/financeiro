@@ -1,5 +1,5 @@
 <?php
-class Cidade extends model {
+class Cidade extends Model {
 
 	public function getStates() {
 		$array = array();
