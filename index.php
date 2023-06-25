@@ -2,7 +2,7 @@
 session_start();
 require 'config.php';
 
-define('BASE_URL', 'http://diego.financeiros.esy.es');
+define('BASE_URL', 'http://diego.financeiros.esy.es/');
 
 spl_autoload_register(function ($class){
     //if(strpos($class, 'Controller') > -1) {
