@@ -89,6 +89,21 @@ td {
     justify-content: center;
     margin-top: 20px;
 }
+.no-loans {
+    text-align: center;
+    padding: 30px;
+    background-color: #f8f9fa;
+    width: 100%;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px dashed #ccc;
+}
+
+.no-loans p {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
 
 .pag_item {
     margin: 0 5px;
