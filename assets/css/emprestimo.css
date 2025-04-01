@@ -1,0 +1,93 @@
+/* Container para os cards */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Estilo para cada card */
+.card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* efeito de elevação no hover */
+}
+
+/* Estilo do cabeçalho do card */
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilo do corpo do card */
+.card-body {
+    padding: 15px;
+    font-size: 14px;
+    color: #333;
+}
+.button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+}
+.button:hover {
+    background-color: #0056b3;
+}   
+
+.button a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+.card-body p {
+    margin-bottom: 10px;
+}
+
+/* Estilo do rodapé do card */
+.card-footer {
+    padding: 10px;
+    background-color: #f4f4f4;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Botões dentro do rodapé */
+.card-footer .button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.card-footer .button:hover {
+    background-color: #0056b3;
+}
+
+/* Ajustando o espaçamento para botões pequenos */
+.button_small {
+    padding: 6px 12px;
+    font-size: 12px;
+}

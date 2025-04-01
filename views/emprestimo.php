@@ -1,89 +1,84 @@
 <head>
-    <link rel="stylesheet" href="assets/css/template.css">
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/emprestimo.css">
 </head>
 
-<!-- <h1>Empréstimos</h1> -->
 <?php if($add_permission): ?>
 <div class="button"><a href="<?php echo BASE_URL;?>/emprestimo/add">Adicionar Emprestimo</a></div>
-
 <?php endif; ?>
+
 <h2>Emprestimos em curso</h2>
-<table border="0" width="100%">
-    <tr>
-        <th>Cliente</th>
-        <th>Capital</th>
-        <th>Pago</th>
-        <!-- <th>Pago em Mensalidades</th> -->
-        <!-- <th>sc</th> -->
-        <!-- <th>mensalidades pagas</th> -->
-        <th>Ações</th>
+
+<?php 
+// Check if there are any active loans (valor_emprestimo > 0)
+$active_loans_exist = false;
+foreach($emprestimo_list as $emprestimo_unico) {
+    if($emprestimo_unico['valor_emprestimo'] > 0) {
+        $active_loans_exist = true;
+        break;
+    }
+}
+?>
+
+<?php if(!$active_loans_exist): ?>
+    <div class="no-loans">
+        <p>Nenhum empréstimo ativo no momento.</p>
         
-    </tr>
-    <?php foreach($emprestimo_list as $emprestimo_unico):?>
-        <?php
-            if($emprestimo_unico['valor_emprestimo'] > 0):
-                ?>
-                <tr>
-                <td>
-            <?php 
-                $client = new Clients();
-                    $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
-                    $data['client_name'] = $clientInfo['name'];
-                echo $data['client_name'];
-                ?>
-            </td>
-            <td><?php echo number_format($emprestimo_unico['valor_emprestimo'],2,',','.') ?></td>
-            <td><?php echo number_format($emprestimo_unico['recebido']+  $emprestimo_unico['mensalidade'],2,',','.') ?></td>
-            <!-- <td><?php echo $emprestimo_unico['mensalidade']?></td> -->
-            <!-- <td><?php echo $emprestimo_unico['juros_sc'] ?></td> -->
-            <!-- <td><?php echo $emprestimo_unico['qtd_mensalidade'] ?></td> -->
-            <td>
-                <div class="button button_small">
-                    <a href="<?php echo BASE_URL; ?>emprestimo/editar/<?php echo $emprestimo_unico['id'];
-                    ?>">Editar</a>
+    </div>
+<?php else: ?>
+    <div class="cards-container">
+        <?php foreach($emprestimo_list as $emprestimo_unico):?>
+            <?php if($emprestimo_unico['valor_emprestimo'] > 0): ?>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <?php 
+                            $client = new Clients();
+                            $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
+                            $data['client_name'] = $clientInfo['name'];
+                            echo $data['client_name'];
+                            ?>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Capital: </strong><?php echo number_format($emprestimo_unico['valor_emprestimo'],2,',','.'); ?></p>
+                        <p><strong>Pago: </strong><?php echo number_format($emprestimo_unico['recebido'] + $emprestimo_unico['mensalidade'],2,',','.'); ?></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="<?php echo BASE_URL; ?>emprestimo/editar/<?php echo $emprestimo_unico['id']; ?>" class="button button_small">Editar</a>
+                        <a href="<?php echo BASE_URL; ?>emprestimo/quitar/<?php echo $emprestimo_unico['id']; ?>" class="button button_small">Quitar</a>
+                    </div>
                 </div>
-                <div class="button button_small">
-                    <a href="<?php echo BASE_URL; ?>emprestimo/quitar/<?php echo $emprestimo_unico['id'];
-                    ?>">Quitar</a>
-                </div>
-            </td>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
-        </tr>
-        <?php endif; ?>
-
-    <?php endforeach;?>
-</table>
 <h2>Já finalizados</h2>
-<table border="0" width="100%">
-    <tr>
-        <th>Cliente</th>
-        <th>Valor recebido</th>
-        <th>Data do emprestimo</th>
-        <!-- <th>Pago em Mensalidades</th> -->
-        <!-- <th>sc</th> -->
-        <!-- <th>mensalidades pagas</th> -->
-        
-    </tr>
-    <?php foreach($emprestimo_list as $emprestimo_unico):?>
-        <?php
-            if($emprestimo_unico['valor_emprestimo'] == 0):
-                ?>
-                <tr>
-                <td>
-            <?php 
-                $client = new Clients();
-                    $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
-                    $data['client_name'] = $clientInfo['name'];
-                echo $data['client_name'];
-                ?>
-            </td>
-            <td><?php echo number_format($emprestimo_unico['recebido'] + $emprestimo_unico['mensalidade'],2,',','.') ?></td>
-            <td><?php echo date('d/m/Y', strtotime($emprestimo_unico['data_emprestimo'])); ?></td>
-            <!-- <td><?php echo $emprestimo_unico['mensalidade']?></td> -->
-            <!-- <td><?php echo $emprestimo_unico['juros_sc'] ?></td> -->
-            <!-- <td><?php echo $emprestimo_unico['qtd_mensalidade'] ?></td> -->
-        </tr>
-        <?php endif; ?>
 
-    <?php endforeach;?>
-</table>
+<?php if (empty(array_filter($emprestimo_list, fn($e) => $e['valor_emprestimo'] == 0))): ?>
+    <p>Nenhum empréstimo finalizado.</p>
+<?php else: ?>
+    <div class="cards-container">
+        <?php foreach($emprestimo_list as $emprestimo_unico):?>
+            <?php if($emprestimo_unico['valor_emprestimo'] == 0): ?>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <?php 
+                            $client = new Clients();
+                            $clientInfo = $client->getInfo($emprestimo_unico['id_client'], $emprestimo_unico['id_company']);
+                            $data['client_name'] = $clientInfo['name'];
+                            echo $data['client_name'];
+                            ?>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Valor Recebido: </strong><?php echo number_format($emprestimo_unico['recebido'] + $emprestimo_unico['mensalidade'],2,',','.'); ?></p>
+                        <p><strong>Data do Empréstimo: </strong><?php echo date('d/m/Y', strtotime($emprestimo_unico['data_emprestimo'])); ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

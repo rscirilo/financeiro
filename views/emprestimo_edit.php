@@ -1,5 +1,6 @@
 <head>
-	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/template.css">
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/emprestimo_editar.css">
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/menu.css">
 </head>
 <body>
 	<h1>Editar dívida</h1>

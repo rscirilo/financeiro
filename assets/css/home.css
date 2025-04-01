@@ -1,0 +1,92 @@
+/* Estilo geral da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container principal */
+.container-obj {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Estilo das seções de estatísticas */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* Estilo para cada item de estatística */
+.stats-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 30%;
+    margin: 10px 0;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Efeito de hover */
+.stats-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do título de cada item */
+.stats-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Estilo dos valores exibidos */
+.stats-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Estilo para lucro */
+.lucro .stats-value {
+    color: #28a745;
+}
+
+/* Estilo para os empréstimos vencidos */
+.atrasado {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 20px;
+}
+
+/* Estilo de títulos */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .stats-item {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .stats-container {
+        flex-direction: column;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}

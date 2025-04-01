@@ -1,5 +1,7 @@
 <head>
-	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/template.css">
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/client_visualizar_dados.css">
+	<link rel="stylesheet" href=" <?php echo BASE_URL?>/assets/css/menu.css">
+
 </head>
 <body>
 	

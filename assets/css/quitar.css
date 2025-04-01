@@ -1,0 +1,86 @@
+/* CSS básico para a página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.emprestimo-info {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.warn {
+    background-color: #ffcc00;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+input[type="text"], input[type="number"], select {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.mensal, .meses {
+    display: none;
+}
+
+.mensal.active, .meses.active {
+    display: block;
+}
+
+.submit {
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.submit:hover {
+    background-color: #218838;
+}
+
+/* Estilos para o cálculo */
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+hr {
+    margin: 20px 0;
+}
+
