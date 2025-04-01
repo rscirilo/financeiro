@@ -52,10 +52,10 @@
                 <p class="stats-title">Recebido no Total:</p>
                 <p class="stats-value"><?php echo number_format($recebido + $mensalidade, 2, ',', '.'); ?></p>
             </div>
-            <div class="stats-item lucro">
-                <p class="stats-title">Lucro Total:</p>
-                <p class="stats-value"><?php echo number_format($lucro, 2, ',', '.'); ?></p>
-            </div>
+            <div class="stats-item lucro <?php echo ($lucro >= 0) ? 'positivo' : 'negativo'; ?>">
+				<p class="stats-title">Lucro Total:</p>
+				<p class="stats-value"><?php echo number_format($lucro, 2, ',', '.'); ?></p>
+			</div>
         </div>
 
         <!-- Empréstimos Vencidos -->
@@ -87,7 +87,9 @@
 
 			if (!$tem_emprestimos_atrasados): // Se não houver nenhum empréstimo atrasado
 				?>
-				<p>Não há empréstimos em atraso.</p>
+				<div class="no-loans">
+					<p>Nenhum empréstimo em atraso.</p>
+				</div>
 			<?php endif; ?>
 		</div>
         

@@ -48,7 +48,7 @@
         <!-- Exibir tipo de juros (Simples ou Composto) -->
         <p>Tipo de juros: <?php echo ($juros_sc == 0) ? 'Composto' : 'Simples'; ?></p>
         <p>Recomendado: <?php echo ($juros_sc == 0) ? 'Se for quitar mais de um mês faça isso mês por mês, um de cada vez' : 'Pode escolher quitar mais de um mês'; ?></p>
-
+		<p>Pagar como mensalidade é pagar apenas o juros mensal, pagar um valor é o pagamento avulso da dívida ativa</p>
         <hr />
 
         <!-- FORMULÁRIO -->

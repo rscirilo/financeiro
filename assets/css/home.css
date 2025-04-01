@@ -14,7 +14,33 @@ body {
     padding: 20px;
     border-radius: 10px;
 }
+.lucro.positivo .stats-value {
+    color: #28a745; /* Verde */
+}
 
+.lucro.negativo .stats-value {
+    color: #dc3545; /* Vermelho */
+}
+
+/* Opcional: Destacar ainda mais */
+.lucro .stats-title {
+    font-weight: bold;
+}
+.no-loans {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px dashed #ccc;
+}
+
+.no-loans p {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
 /* Estilo das seções de estatísticas */
 .stats-container {
     display: flex;

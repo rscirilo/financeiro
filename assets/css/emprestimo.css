@@ -10,7 +10,7 @@
 .card {
     background-color: #fff;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 8px 8px 0px 0px;
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -53,6 +53,32 @@
 .button:hover {
     background-color: #0056b3;
 }   
+.card.verde {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card.amarelo {
+    background-color: #ffc107;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card.vermelho {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 .button a {
     color: white;
@@ -90,4 +116,32 @@
 .button_small {
     padding: 6px 12px;
     font-size: 12px;
+}
+.no-loans {
+    text-align: center;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px dashed #ccc;
+}
+
+.no-loans p {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.btn-add-loan {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-add-loan:hover {
+    background-color: #218838;
 }
