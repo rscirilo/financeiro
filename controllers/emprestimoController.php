@@ -57,31 +57,23 @@ class emprestimoController extends Controller {
             $data['clients_list'] = $emp->getListNome($u->getCompany());
     
             if(isset($_POST['valor']) && !empty($_POST['id_cliente'])) {
-        $id = addslashes($_POST['id_cliente']);
-        $valor = addslashes($_POST['valor']);
-        $juros = addslashes($_POST['juros']);
-        $juros_sc = addslashes($_POST['juros_sc']);
+                $id = addslashes($_POST['id_cliente']);
+                $valor = addslashes($_POST['valor']);
+                $juros = addslashes($_POST['juros']);
+                $juros_sc = addslashes($_POST['juros_sc']);
 
-        $valor = str_replace('.', '', $valor);
-        $valor = str_replace(',', '.', $valor);
-        $valor = floatval($valor);
+                $valor = str_replace('.', '', $valor);
+                $valor = str_replace(',', '.', $valor);
+                $valor = floatval($valor);
 
-        $divida = $valor; // Inicia devendo o valor total
-        $meses_pagos = 0;
-        $dataemprestimo = date('Y-m-d');
-        
-        if($juros_sc == 'simples'){
-            $juros_sc = true;
-            $emp->add($u->getCompany(), $id, $valor, $juros, $dataemprestimo, $divida, $meses_pagos, true);
-        }
-        else if($juros_sc == 'composto'){
-            $juros_sc = false;
-            $emp->add($u->getCompany(), $id, $valor, $juros, $dataemprestimo, $divida, $meses_pagos, false);
-        }   
-        
-        header("Location: ".BASE_URL."/emprestimo");
-        exit();
-    }
+                $divida = $valor; // Initialize devendo with valor
+                $meses_pagos = 0;
+                $dataemprestimo = date('Y-m-d');
+
+                $emp->add($u->getCompany(), $id, $valor, $juros, $dataemprestimo, 0, $meses_pagos, ($juros_sc == 'simples')); // Set recebido to 0
+                header("Location: ".BASE_URL."/emprestimo");
+                exit();
+            }
     
             if($data['clients_list'] < 1){
                 $data['error_msg'] = "Nenhum cliente cadastrado";
@@ -174,12 +166,11 @@ class emprestimoController extends Controller {
                         $valor_emprestimo
                     );
                     
-                } else if($select == "nao") { // Pagamento direto
+                } else if($select == "nao") { // Direct payment
                     $valor_pago = (float)str_replace(['.', ','], ['', '.'], $_POST['valor']);
                     $total_pago = $recebido + $valor_pago;
-                    $valor_emprestimo -= $valor_pago;
-                    
-                    // Call the method to update in database
+
+                    // Update devendo in the database
                     $emp->quitar(
                         $id, 
                         $id_company, 

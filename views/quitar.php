@@ -10,14 +10,13 @@
     <?php endif; ?>
 
     <div class="emprestimo-info">
-        <!-- <p>Se for quitar usando juros simples pode escolher mais de um mês, mas o recomendado para juros composto é fazer de mês em mês, pois o valor é alterado.</p> -->
-
         <?php
             $juros = 0;
-            $juros_por_mes = array(); // Array para armazenar os valores dos juros por mês
+            $juros_por_mes = array();
 
-            // Definir capital e taxa de juros
+            // Definir valores
             $capital = isset($client_info['valor_emprestimo']) ? $client_info['valor_emprestimo'] : 0;
+            $devendo = isset($client_info['devendo']) ? $client_info['devendo'] : 0; // Usa 'devendo' ou o capital se não existir
             $juros_mes = isset($client_info['juros_mes']) ? $client_info['juros_mes'] : 0;
             $juros_sc = isset($client_info['juros_sc']) ? $client_info['juros_sc'] : 0;
             $data_emprestimo = isset($client_info['data_emprestimo']) ? $client_info['data_emprestimo'] : '';
@@ -30,35 +29,35 @@
                 $diferenca_meses = $intervalo->m + ($intervalo->y * 12);
 
                 if($diferenca_meses > $client_info['qtd_mensalidade']){
-                    $a = $capital * $taxa_juros;  // Definir $a para juros
-                    $quitacao_mes = $diferenca_meses - $client_info['qtd_mensalidade'];  // Garantir que $quitacao_mes é definido
-                    $montante = $capital * pow(1 + $taxa_juros, $quitacao_mes);
-                    $juros_total = $montante - $capital;
+                    $a = $capital * $taxa_juros;  // Usa $devendo para cálculo
+                    $quitacao_mes = $diferenca_meses - $client_info['qtd_mensalidade'];
+                    $montante = $capital * pow(1 + $taxa_juros, $quitacao_mes); // Usa $devendo
+                    $juros_total = $montante - $capital; // Usa $devendo
                     $total_mensalidade = $juros_total + $a;
                 } else {
-                    $total_mensalidade = $capital * $taxa_juros;
+                    $total_mensalidade = $capital * $taxa_juros; // Usa $devendo
                 }
             } else if ($juros_sc == 1) { // Juros simples
-                $total_mensalidade = $capital * $juros_mes / 100;
+                $total_mensalidade = $capital * $juros_mes / 100; // Usa $devendo
             }
         ?>
 
-        <p>Juros da mensalidade a pagar: <?php echo number_format(sprintf("%.2f", $total_mensalidade), 2, ',', '.'); ?></p>
-
-        <!-- Exibir tipo de juros (Simples ou Composto) -->
+        <p>Saldo Devedor Atual: R$ <?php echo number_format($devendo, 2, ',', '.'); ?></p>
+        <p>Juros da mensalidade a pagar: R$ <?php echo number_format($total_mensalidade, 2, ',', '.'); ?></p>
         <p>Tipo de juros: <?php echo ($juros_sc == 0) ? 'Composto' : 'Simples'; ?></p>
         <p>Recomendado: <?php echo ($juros_sc == 0) ? 'Se for quitar mais de um mês faça isso mês por mês, um de cada vez' : 'Pode escolher quitar mais de um mês'; ?></p>
-		<p>Pagar como mensalidade é pagar apenas o juros mensal, pagar um valor é o pagamento avulso da dívida ativa</p>
+        <p>Pagar como mensalidade é pagar apenas o juros mensal, pagar um valor é o pagamento avulso da dívida ativa</p>
         <hr />
 
         <!-- FORMULÁRIO -->
         <form class="form" method="POST">
-            <input type="hidden" name="id" id="id" value="<?php echo isset($client_info['id']) ? $client_info['id'] : ''; ?>" />    
+            <input type="hidden" name="id" value="<?php echo isset($client_info['id']) ? $client_info['id'] : ''; ?>" />    
             <input type="hidden" name="juros-pago" value="<?php echo $juros ?>">
             <input type="hidden" name="juros_mes" value="<?php echo $juros_mes; ?>">
             <input type="hidden" name="recebido" value="<?php echo isset($client_info['recebido']) ? $client_info['recebido'] : ''; ?>">
             <input type="hidden" name="qtd_mensalidade" value="<?php echo isset($client_info['qtd_mensalidade']) ? $client_info['qtd_mensalidade'] : ''; ?>">
-            <input type="hidden" name="valor_emprestimo" value="<?php echo $capital; ?>" /><br/><br/>
+            <input type="hidden" name="valor_emprestimo" value="<?php echo $capital; ?>" />
+            <input type="hidden" name="devendo" value="<?php echo $devendo; ?>" /> <!-- Campo principal para atualização -->
             <input type="hidden" name="data_emprestimo" value="<?php echo $data_emprestimo; ?>">
             <input type="hidden" name="juros_sc" value="<?php echo $juros_sc; ?>">
             <input type="hidden" name="id_client" value="<?php echo isset($client_info['id_client']) ? $client_info['id_client'] : ''; ?>" />
@@ -82,7 +81,7 @@
 
             <div id="meses" class="meses">
                 <label for="valor">Valor pago</label><br/>
-                <input type="text" name="valor" /><br/><br/>
+                <input type="text" name="valor" oninput="formatCurrency(this)" /><br/><br/>
             </div>
 
             <input type="submit" id="submit" class="submit" value="Adicionar pagamento" />
@@ -93,22 +92,31 @@
     <script type="text/javascript" src="<?php echo BASE_URL;?>/assets/js/script_inventory_add.js"></script>
 
     <script>
+        // Formatação de moeda para o campo de valor
+        function formatCurrency(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = (value/100).toFixed(2);
+            input.value = parseFloat(value).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
         document.getElementById('select').addEventListener('change', function() {
             var selectValue = this.value;
             var mensal = document.getElementById('mensal');
             var meses = document.getElementById('meses');
 
             if (selectValue === 'sim') {
-                mensal.style.display = 'block'; // Mostrar o campo de meses pagos
-                meses.style.display = 'none'; // Ocultar o campo de valor pago
+                mensal.style.display = 'block';
+                meses.style.display = 'none';
             } else if (selectValue === 'nao') {
-                mensal.style.display = 'none'; // Ocultar o campo de meses pagos
-                meses.style.display = 'block'; // Mostrar o campo de valor pago
+                mensal.style.display = 'none';
+                meses.style.display = 'block';
             } else {
-                mensal.style.display = 'none'; // Ocultar os dois campos se nada for selecionado
+                mensal.style.display = 'none';
                 meses.style.display = 'none';
             }
         });
     </script>
-
 </body>
