@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 02/04/2025 às 13:13
+-- Tempo de geração: 02/04/2025 às 13:20
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -46,14 +46,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `internal_obs` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
-
---
--- Despejando dados para a tabela `clients`
---
-
-INSERT INTO `clients` (`id`, `id_company`, `name`, `email`, `phone`, `address`, `address2`, `address_number`, `address_neighb`, `address_city`, `address_state`, `address_country`, `address_zipcode`, `stars`, `internal_obs`) VALUES
-(7, 1, 'teste', 'artemisia@admin.com', '30249234230', 'aaaaaaaaaaaaa', 'aaaaaaaaaaaaa', 'aaaaaaaaaaaaa', 'aaaaaaaa', 'aaaaaaaaaaa', 'aaa', 'a', 'aaaaaaa', 3, ''),
-(8, 1, 'bbbbbbbb', 'bbbbbbbbbbbbb@gmail.com', 'bbbbbbbbbbbbbb', 'bbbbbbbbbbbb', 'bbbbbbbbb', 'bbbbbbbbbbbbb', 'bbbbbbbbbb', 'bbbbbbbbbbbb', 'bbbbbbbbbbbbb', 'bbbbb', 'bbbbbbbbbbb', 3, 'bbbb');
 
 -- --------------------------------------------------------
 
