@@ -92,20 +92,30 @@ class Emprestimo extends Model{
         $sql->execute();
         
     }
-    public function edit($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $recebido, $meses_pagos){
-        $sql = $this->db->prepare("UPDATE emprestimo SET id_client = :id_client, valor_emprestimo = :valor_emprestimo, juros_mes = :juros_mes, data_emprestimo = :data_emprestimo, recebido = :recebido, qtd_mensalidade = :qtd_mensalidade WHERE id = :id AND id_company = :id_company");
+    public function edit($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $recebido, $meses_pagos) {
+        $sql = $this->db->prepare("UPDATE emprestimo 
+                                   SET id_client = :id_client, valor_emprestimo = :valor_emprestimo, devendo = :devendo, 
+                                       juros_mes = :juros_mes, data_emprestimo = :data_emprestimo, 
+                                       recebido = :recebido, qtd_mensalidade = :qtd_mensalidade 
+                                   WHERE id = :id AND id_company = :id_company");
         $sql->bindValue(':id', $id);
         $sql->bindValue(':id_company', $id_company);
         $sql->bindValue(':id_client', $id_client);
         $sql->bindValue(':valor_emprestimo', $valor_emprestimo);
+        $sql->bindValue(':devendo', $valor_emprestimo); // Ensure devendo matches valor_emprestimo
         $sql->bindValue(':juros_mes', $juros_mes);
-        $sql->bindValue(':qtd_mensalidade', $meses_pagos);
         $sql->bindValue(':data_emprestimo', $data_emprestimo);
         $sql->bindValue(':recebido', $recebido);
+        $sql->bindValue(':qtd_mensalidade', $meses_pagos);
         $sql->execute();
     }      
-    public function quitar($id, $id_company, $id_client, $valor_emprestimo, $data_emprestimo, $juros_mes, $recebido, $mensalidade, $qtd_mensalidade, $juros_sc){
-        $sql = $this->db->prepare("UPDATE emprestimo SET id_client = :id_client, juros_mes = :juros_mes, recebido = :recebido, data_emprestimo = :data_emprestimo, mensalidade = :mensalidade, qtd_mensalidade = :qtd_mensalidade, juros_sc = :juros_sc, devendo = devendo - :valor_pago WHERE id = :id AND id_company = :id_company");
+    public function quitar($id, $id_company, $id_client, $valor_emprestimo, $data_emprestimo, $juros_mes, $recebido, $mensalidade, $qtd_mensalidade, $juros_sc) {
+        $sql = $this->db->prepare("UPDATE emprestimo 
+                                   SET id_client = :id_client, juros_mes = :juros_mes, recebido = :recebido, 
+                                       data_emprestimo = :data_emprestimo, mensalidade = :mensalidade, 
+                                       qtd_mensalidade = :qtd_mensalidade, juros_sc = :juros_sc, 
+                                       devendo = devendo - :valor_pago 
+                                   WHERE id = :id AND id_company = :id_company");
         $sql->bindValue(':id', $id);
         $sql->bindValue(':id_company', $id_company);
         $sql->bindValue(':id_client', $id_client);
@@ -115,7 +125,7 @@ class Emprestimo extends Model{
         $sql->bindValue(':juros_sc', $juros_sc);
         $sql->bindValue(':qtd_mensalidade', $qtd_mensalidade);
         $sql->bindValue(':mensalidade', $mensalidade);
-        $sql->bindValue(':valor_pago', $mensalidade); // Deduct payment from devendo
+        $sql->bindValue(':valor_pago', $recebido); // Deduct the paid amount from devendo
         $sql->execute();
     }
     public function mensalidade($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $total_pago, $mensalidade, $meses_pagos){

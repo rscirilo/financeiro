@@ -195,7 +195,7 @@ class emprestimoController extends Controller {
 
 
 
-    public function editar($id){
+    public function editar($id) {
         $data = array();
         $u = new Users();
         $u->setLoggedUser();
@@ -204,31 +204,33 @@ class emprestimoController extends Controller {
         $data['user_email'] = $u->getEmail();
         $data['id_company'] = $company->getId();
 
-
-        if($u->hasPermission('emprestimo_edit')){
+        if ($u->hasPermission('emprestimo_edit')) {
             $emp = new Emprestimo();
             $data['emp_info'] = $emp->getInfo($id, $u->getCompany());
 
-            
-            $this->loadTemplate('emprestimo_edit', $data);
-            if(isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
-                $valor_emprestimo = addslashes($_POST['valor_emprestimo']);
-
-                $valor_emprestimo = str_replace('.', '', $valor_emprestimo);
-                $valor_emprestimo = str_replace(',', '.', $valor_emprestimo);
-
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valor_emprestimo']) && !empty($_POST['juros_mes'])) {
+                // Sanitize and process input data
+                $valor_emprestimo = str_replace(['.', ','], ['', '.'], $_POST['valor_emprestimo']);
                 $valor_emprestimo = floatval($valor_emprestimo);
-                $juros_mes = addslashes($_POST['juros_mes']);
-                $id_client = addslashes($_POST['id_client']);
-                $data_emprestimo = addslashes($_POST['data_emprestimo']);
-                $id_company = addslashes($_POST['id_company']);
-                $recebido = addslashes($_POST['recebido']);
-                $meses_pagos = addslashes($_POST['meses_pagos']);
+                $juros_mes = floatval($_POST['juros_mes']);
+                $id_client = intval($_POST['id_client']);
+                $data_emprestimo = $_POST['data_emprestimo'];
+                $id_company = intval($_POST['id_company']);
+                $recebido = floatval($_POST['recebido']);
+                $meses_pagos = intval($_POST['meses_pagos']);
 
+                // Update the loan in the database
                 $emp->edit($id, $id_company, $id_client, $valor_emprestimo, $juros_mes, $data_emprestimo, $recebido, $meses_pagos);
-                header("Location: ".BASE_URL."/emprestimo");  
-                 
+
+                // Redirect to avoid header issues
+                header("Location: " . BASE_URL . "/emprestimo");
+                exit();
             }
+
+            $this->loadTemplate('emprestimo_edit', $data);
+        } else {
+            header("Location: " . BASE_URL);
+            exit();
         }
     }
 }
